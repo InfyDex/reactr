@@ -20,7 +20,7 @@ class CounterView extends ReactrView<CounterController> {
               'You have pushed the button this many times:',
             ),
             React(
-              notifier: controller.count.notifier,
+              value: controller.count,
               builder: (context, value) => Text(
                 '$value',
                 style: Theme.of(context).textTheme.headlineMedium,

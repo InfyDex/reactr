@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:reactr/reactr.dart';
 
 class React<T> extends StatelessWidget {
-  final ValueNotifier<T> notifier;
+  final Rc<T> value;
   final Widget Function(BuildContext context, T value) builder;
 
-  const React({super.key, required this.builder, required this.notifier});
+  const React({super.key, required this.builder, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<T>(
-      valueListenable: notifier,
+      valueListenable: value.notifier,
       builder: (context, value, child) => builder.call(context, value),
     );
   }
