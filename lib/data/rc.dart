@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Rc<T> {
   final ValueNotifier<T> _value;
 
-  Rc(T value): _value = ValueNotifier<T>(value);
+  Rc(T value) : _value = ValueNotifier<T>(value);
 
   T get value => _value.value;
 
