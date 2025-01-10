@@ -1,6 +1,7 @@
 export 'package:reactr/bindings/reactr_binding.dart';
 export 'package:reactr/controllers/reactr_controller.dart';
 export 'package:reactr/data/rc.dart';
+export 'package:reactr/data/rc_int.dart';
 export 'package:reactr/data/rc_list.dart';
 export 'package:reactr/widgets/react.dart';
 export 'package:reactr/widgets/reactr_view.dart';
