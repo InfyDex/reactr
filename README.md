@@ -8,10 +8,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  reactr:
-    git:
-      url: https://github.com/your-repo/reactr.git
-      ref: main
+  reactr: ^0.1.0
 ```
 
 Then, run `flutter pub get` to install the package.

@@ -1,7 +1,7 @@
 name: reactr
 description: "State Management"
 version: 0.1.0
-homepage:
+repository: https://github.com/InfyDex/reactr
 
 environment:
   sdk: ^3.5.4
