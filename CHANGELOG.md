@@ -1,8 +1,4 @@
-## 0.1.0
+## 0.1.1
 
-- Initial release of Reactr.
-- State management using `ReactrController`.
-- Reactive state with `Rc` and `RcList`.
-- View binding with `ReactrView`.
-- Navigation support with `Reactr.to` and `Reactr.toNamed`.
-- Example counter application demonstrating usage.
+- Added `RcBool` and `RcDouble` classes for reactive boolean and double values.
+- Updated documentation and examples.

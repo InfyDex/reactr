@@ -10,4 +10,6 @@ class Rc<T> {
   set value(T val) => _value.value = val;
 
   ValueNotifier<T> get notifier => _value;
+
+  void setValue(T value) => _value.value = value;
 }
