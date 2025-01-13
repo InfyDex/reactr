@@ -21,7 +21,7 @@ class CounterView extends ReactrView<CounterController> {
             ),
             React(
               value: controller.count,
-              builder: (context, value) => Text(
+              builder: (value) => Text(
                 '$value',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),

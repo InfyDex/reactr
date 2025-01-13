@@ -3,7 +3,7 @@ import 'package:reactr/reactr.dart';
 
 class React<T> extends StatelessWidget {
   final Rc<T> value;
-  final Widget Function(BuildContext context, T value) builder;
+  final Widget Function(T value) builder;
 
   const React({super.key, required this.builder, required this.value});
 
@@ -11,7 +11,7 @@ class React<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<T>(
       valueListenable: value.notifier,
-      builder: (context, value, child) => builder.call(context, value),
+      builder: (context, value, child) => builder.call(value),
     );
   }
 }
