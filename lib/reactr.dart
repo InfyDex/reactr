@@ -7,6 +7,7 @@ export 'package:reactr/data/rc_int.dart';
 export 'package:reactr/data/rc_list.dart';
 export 'package:reactr/data/rc_map.dart';
 export 'package:reactr/data/rc_string.dart';
+export 'package:reactr/data/rcn_bool.dart';
 export 'package:reactr/widgets/react.dart';
 export 'package:reactr/widgets/reactr_view.dart';
 export 'package:reactr/reactr.dart';
