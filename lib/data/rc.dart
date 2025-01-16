@@ -12,4 +12,6 @@ class Rc<T> {
   ValueNotifier<T> get notifier => _value;
 
   void setValue(T value) => _value.value = value;
+
+  void refresh() => _value.notifyListeners();
 }
