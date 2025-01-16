@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ReactrMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -38,7 +38,6 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: FilledButton(
           onPressed: () => Reactr.to(
-            context: context,
             binding: CounterBinding(),
             builder: () => const CounterView(),
           ),

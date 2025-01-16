@@ -11,6 +11,7 @@ export 'package:reactr/data/rcn_bool.dart';
 export 'package:reactr/widgets/react.dart';
 export 'package:reactr/widgets/reactr_view.dart';
 export 'package:reactr/reactr.dart';
+export 'package:reactr/reactr_material_app.dart';
 import 'package:flutter/material.dart';
 import 'package:reactr/bindings/reactr_binding.dart';
 import 'package:reactr/controllers/reactr_controller.dart';
@@ -19,6 +20,12 @@ import 'package:reactr/widgets/reactr_view.dart';
 import 'package:get_it/get_it.dart';
 
 class Reactr {
+  Reactr._privateConstructor();
+
+  static GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
+
+  static BuildContext get context => key.currentContext!;
+
   static void _callOnClose<T extends ReactrController>() {
     try {
       find<T>().onClose();
@@ -30,25 +37,23 @@ class Reactr {
   }
 
   static Future<dynamic> toNamed<T extends ReactrController>({
-    required BuildContext context,
     required ReactrBinding binding,
     required String routeName,
   }) async {
     binding.onBind();
-    final result = await Navigator.pushNamed(context, routeName);
+    final result = await Navigator.pushNamed(key.currentContext!, routeName);
     _callOnClose<T>();
     binding.unBind();
     return result;
   }
 
   static Future<dynamic> to<T extends ReactrController>({
-    required BuildContext context,
     required ReactrBinding binding,
     required ReactrView<T> Function() builder,
   }) async {
     binding.onBind();
     final result = await Navigator.push(
-      context,
+      key.currentContext!,
       MaterialPageRoute(builder: (context) => builder.call()),
     );
     _callOnClose<T>();
@@ -56,8 +61,8 @@ class Reactr {
     return result;
   }
 
-  static void back(BuildContext context, {dynamic result}) {
-    Navigator.pop(context, result);
+  static void back({dynamic result}) {
+    Navigator.pop(key.currentContext!, result);
   }
 
   static void _logCreated(String className) {
@@ -95,5 +100,50 @@ class Reactr {
   static void remove<T extends Object>() {
     GetIt.I.unregister<T>();
     _logDestroyed(T.toString());
+  }
+
+  static Future<T?> bottomSheet<T>({
+    required WidgetBuilder builder,
+    Color? backgroundColor,
+    String? barrierLabel,
+    double? elevation,
+    ShapeBorder? shape,
+    Clip? clipBehavior,
+    BoxConstraints? constraints,
+    Color? barrierColor,
+    bool isScrollControlled = false,
+    double scrollControlDisabledMaxHeightRatio = 9.0 / 16.0,
+    bool useRootNavigator = false,
+    bool isDismissible = true,
+    bool enableDrag = true,
+    bool? showDragHandle,
+    bool useSafeArea = false,
+    RouteSettings? routeSettings,
+    AnimationController? transitionAnimationController,
+    Offset? anchorPoint,
+    AnimationStyle? sheetAnimationStyle,
+  }) {
+    return showModalBottomSheet(
+      context: key.currentContext!,
+      builder: builder,
+      backgroundColor: backgroundColor,
+      barrierLabel: barrierLabel,
+      elevation: elevation,
+      shape: shape,
+      clipBehavior: clipBehavior,
+      constraints: constraints,
+      barrierColor: barrierColor,
+      isScrollControlled: isScrollControlled,
+      scrollControlDisabledMaxHeightRatio: scrollControlDisabledMaxHeightRatio,
+      anchorPoint: anchorPoint,
+      enableDrag: enableDrag,
+      routeSettings: routeSettings,
+      showDragHandle: showDragHandle,
+      useRootNavigator: useRootNavigator,
+      isDismissible: isDismissible,
+      sheetAnimationStyle: sheetAnimationStyle,
+      transitionAnimationController: transitionAnimationController,
+      useSafeArea: useSafeArea,
+    );
   }
 }

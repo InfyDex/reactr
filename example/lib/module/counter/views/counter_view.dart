@@ -1,4 +1,5 @@
 import 'package:example/module/counter/controllers/counter_controller.dart';
+import 'package:example/module/counter/views/test_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:reactr/reactr.dart';
 
@@ -16,9 +17,13 @@ class CounterView extends ReactrView<CounterController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            FilledButton(
+              onPressed: () => Reactr.bottomSheet(
+                builder: (context) => const TestBottomSheet(),
+              ),
+              child: const Text("Open Bottom Sheet"),
             ),
+            const Text('You have pushed the button this many times:'),
             React(
               value: controller.count,
               builder: (value) => Text(
