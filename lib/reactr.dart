@@ -36,7 +36,7 @@ class Reactr {
     }
   }
 
-  static Object? get arguments => ModalRoute.of(context)!.settings.arguments;
+  static Object? arguments;
 
   static Future<dynamic> toNamed<T extends ReactrController>({
     required ReactrBinding binding,
@@ -44,6 +44,7 @@ class Reactr {
     Object? arguments,
   }) async {
     binding.onBind();
+    arguments = arguments;
     final result = await Navigator.pushNamed(
       context,
       routeName,
@@ -60,6 +61,7 @@ class Reactr {
     Object? arguments,
   }) async {
     binding.onBind();
+    arguments = arguments;
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
