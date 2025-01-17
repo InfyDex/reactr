@@ -44,7 +44,7 @@ class Reactr {
     Object? arguments,
   }) async {
     binding.onBind();
-    arguments = arguments;
+    Reactr.arguments = arguments;
     final result = await Navigator.pushNamed(
       context,
       routeName,
@@ -52,6 +52,7 @@ class Reactr {
     );
     _callOnClose<T>();
     binding.unBind();
+    Reactr.arguments = null;
     return result;
   }
 
@@ -61,7 +62,7 @@ class Reactr {
     Object? arguments,
   }) async {
     binding.onBind();
-    arguments = arguments;
+    Reactr.arguments = arguments;
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -71,6 +72,7 @@ class Reactr {
     );
     _callOnClose<T>();
     binding.unBind();
+    Reactr.arguments = null;
     return result;
   }
 
