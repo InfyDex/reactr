@@ -36,12 +36,19 @@ class Reactr {
     }
   }
 
+  static Object? get arguments => ModalRoute.of(context)!.settings.arguments;
+
   static Future<dynamic> toNamed<T extends ReactrController>({
     required ReactrBinding binding,
     required String routeName,
+    Object? arguments,
   }) async {
     binding.onBind();
-    final result = await Navigator.pushNamed(key.currentContext!, routeName);
+    final result = await Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: arguments,
+    );
     _callOnClose<T>();
     binding.unBind();
     return result;
@@ -50,11 +57,15 @@ class Reactr {
   static Future<dynamic> to<T extends ReactrController>({
     required ReactrBinding binding,
     required ReactrView<T> Function() builder,
+    Object? arguments,
   }) async {
     binding.onBind();
     final result = await Navigator.push(
-      key.currentContext!,
-      MaterialPageRoute(builder: (context) => builder.call()),
+      context,
+      MaterialPageRoute(
+        builder: (context) => builder.call(),
+        settings: RouteSettings(arguments: arguments),
+      ),
     );
     _callOnClose<T>();
     binding.unBind();
@@ -124,7 +135,7 @@ class Reactr {
     AnimationStyle? sheetAnimationStyle,
   }) {
     return showModalBottomSheet(
-      context: key.currentContext!,
+      context: context,
       builder: builder,
       backgroundColor: backgroundColor,
       barrierLabel: barrierLabel,
