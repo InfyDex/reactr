@@ -24,7 +24,7 @@ class CounterView extends ReactrView<CounterController> {
               child: const Text("Open Bottom Sheet"),
             ),
             const Text('You have pushed the button this many times:'),
-            React(
+            ReactBuilder(
               value: controller.count,
               builder: (value) => Text(
                 '$value',
