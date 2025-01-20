@@ -1,5 +1,5 @@
-import 'package:reactr/data/rc.dart';
+import 'package:reactr/reactr.dart';
 
-class Rcn<T> extends Rc<T?> {
-  Rcn(super.value);
+class RcnBool extends Rcn<bool> {
+  RcnBool(super.value);
 }
