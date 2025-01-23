@@ -14,4 +14,16 @@ class Rc<T> {
   void setValue(T value) => _value.value = value;
 
   void refresh() => _value.notifyListeners();
+
+  void addListener(void Function() listener) {
+    _value.addListener(listener);
+  }
+
+  void removeListener(void Function() listener) {
+    _value.removeListener(listener);
+  }
+
+  void dispose() {
+    _value.dispose();
+  }
 }
