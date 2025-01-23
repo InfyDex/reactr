@@ -25,19 +25,28 @@ class CounterView extends ReactrView<CounterController> {
             ),
             const Text('You have pushed the button this many times:'),
             React(
-              value: controller.count,
-              builder: (value) => Text(
-                '$value',
+              () => Text(
+                '${controller.count.value.toString()} ${controller.count1.value.toString()}',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
+            const SizedBox(height: 100),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton(
+                  onPressed: controller.increment,
+                  child: const Icon(Icons.add),
+                ),
+                const SizedBox(width: 10),
+                FilledButton(
+                  onPressed: controller.increment1,
+                  child: const Icon(Icons.safety_check),
+                ),
+              ],
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: controller.increment,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
