@@ -2,6 +2,7 @@ import 'package:reactr/reactr.dart';
 
 class CounterController extends ReactrController {
   final count = RcInt(-1);
+  final count1 = RcInt(0);
 
   @override
   void onInit() {
@@ -11,6 +12,10 @@ class CounterController extends ReactrController {
 
   void increment() {
     count.value++;
+  }
+
+  void increment1() {
+    count1.value++;
   }
 
   @override
