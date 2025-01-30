@@ -123,6 +123,50 @@ class Reactr {
     _logDestroyed(T.toString());
   }
 
+  static void snackBar({
+    required Widget content,
+    Color? backgroundColor,
+    double? elevation,
+    EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding,
+    double? width,
+    ShapeBorder? shape,
+    HitTestBehavior? hitTestBehavior,
+    SnackBarBehavior? behavior,
+    SnackBarAction? action,
+    double? actionOverflowThreshold,
+    bool? showCloseIcon,
+    Color? closeIconColor,
+    Duration duration = const Duration(milliseconds: 4000),
+    Animation<double>? animation,
+    VoidCallback? onVisible,
+    DismissDirection? dismissDirection,
+    Clip clipBehavior = Clip.hardEdge,
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: content,
+        backgroundColor: backgroundColor,
+        elevation: elevation,
+        margin: margin,
+        padding: padding,
+        width: width,
+        shape: shape,
+        hitTestBehavior: hitTestBehavior,
+        behavior: behavior,
+        action: action,
+        actionOverflowThreshold: actionOverflowThreshold,
+        showCloseIcon: showCloseIcon,
+        closeIconColor: closeIconColor,
+        duration: duration,
+        animation: animation,
+        onVisible: onVisible,
+        dismissDirection: dismissDirection,
+        clipBehavior: clipBehavior,
+      ),
+    );
+  }
+
   static Future<T?> bottomSheet<T>({
     required WidgetBuilder builder,
     Color? backgroundColor,
