@@ -86,8 +86,12 @@ class Reactr {
     return result;
   }
 
-  static void back({dynamic result}) {
-    Navigator.pop(key.currentContext!, result);
+  static void back({dynamic result, bool isSnackbar = false}) {
+    if (isSnackbar) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    } else {
+      Navigator.pop(context, result);
+    }
   }
 
   static void _logCreated(String className) {
