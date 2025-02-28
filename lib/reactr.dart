@@ -44,6 +44,10 @@ class Reactr {
 
   static Object? arguments;
 
+  static double get width => MediaQuery.of(context).size.width;
+
+  static double get height => MediaQuery.of(context).size.height;
+
   static Future<dynamic> toNamed<T extends ReactrController>({
     required ReactrBinding binding,
     required String routeName,
