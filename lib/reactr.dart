@@ -62,7 +62,6 @@ class Reactr {
     );
     _callOnClose<T>();
     binding.unBind();
-    Reactr.arguments = null;
     return result;
   }
 
@@ -82,7 +81,6 @@ class Reactr {
     );
     _callOnClose<T>();
     binding.unBind();
-    Reactr.arguments = null;
     return result;
   }
 
@@ -102,7 +100,6 @@ class Reactr {
     );
     _callOnClose<T>();
     binding.unBind();
-    Reactr.arguments = null;
     return result;
   }
 
@@ -124,7 +121,6 @@ class Reactr {
     );
     _callOnClose<T>();
     binding.unBind();
-    Reactr.arguments = null;
     return result;
   }
 
