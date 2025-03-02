@@ -86,6 +86,28 @@ class Reactr {
     return result;
   }
 
+  static Future<dynamic> replaceUntil<T extends ReactrController>({
+    required ReactrBinding binding,
+    required ReactrView<T> Function() builder,
+    required RoutePredicate predicate,
+    Object? arguments,
+  }) async {
+    binding.onBind();
+    Reactr.arguments = arguments;
+    final result = await Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => builder.call(),
+        settings: RouteSettings(arguments: arguments),
+      ),
+      predicate,
+    );
+    _callOnClose<T>();
+    binding.unBind();
+    Reactr.arguments = null;
+    return result;
+  }
+
   static void back({dynamic result, bool isSnackbar = false}) {
     if (isSnackbar) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
