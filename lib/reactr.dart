@@ -86,6 +86,26 @@ class Reactr {
     return result;
   }
 
+  static Future<dynamic> replace<T extends ReactrController>({
+    required ReactrBinding binding,
+    required ReactrView<T> Function() builder,
+    Object? arguments,
+  }) async {
+    binding.onBind();
+    Reactr.arguments = arguments;
+    final result = await Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => builder.call(),
+        settings: RouteSettings(arguments: arguments),
+      ),
+    );
+    _callOnClose<T>();
+    binding.unBind();
+    Reactr.arguments = null;
+    return result;
+  }
+
   static Future<dynamic> replaceUntil<T extends ReactrController>({
     required ReactrBinding binding,
     required ReactrView<T> Function() builder,
