@@ -8,82 +8,96 @@ class RcList<T> extends Rc<List<T>> {
   }
 
   void addAll(List<T> list) {
-    value.addAll(list);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.addAll(list);
+    value = temp;
   }
 
   void add(T item) {
-    value.add(item);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.add(item);
+    value = temp;
   }
 
   void remove(T item) {
-    value.remove(item);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.remove(item);
+    value = temp;
   }
 
   void removeAt(int index) {
-    value.removeAt(index);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.removeAt(index);
+    value = temp;
   }
 
   void clear() {
-    value.clear();
-    refresh();
+    value = <T>[];
   }
 
   void insert(int index, T item) {
-    value.insert(index, item);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.insert(index,item);
+    value = temp;
   }
 
   void insertAll(int index, List<T> items) {
-    value.insertAll(index, items);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.insertAll(index,items);
+    value = temp;
   }
 
   void removeWhere(bool Function(T) test) {
-    value.removeWhere(test);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.removeWhere(test);
+    value = temp;
   }
 
   void retainWhere(bool Function(T) test) {
-    value.retainWhere(test);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.retainWhere(test);
+    value = temp;
   }
 
   void sort([int Function(T, T)? compare]) {
-    value.sort(compare);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.sort(compare);
+    value = temp;
   }
 
   void shuffle() {
-    value.shuffle();
-    refresh();
+    final temp = List<T>.from(value);
+    temp.shuffle();
+    value = temp;
   }
 
   void fillRange(int start, int end, [T? fillValue]) {
-    value.fillRange(start, end, fillValue);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.fillRange(start, end, fillValue);
+    value = temp;
   }
 
   void setAll(int index, List<T> items) {
-    value.setAll(index, items);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.setAll(index, items);
+    value = temp;
   }
 
   void setRange(int start, int end, Iterable<T> newContents, [int skipCount = 0]) {
-    value.setRange(start, end, newContents, skipCount);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.setRange(start, end, newContents, skipCount);
+    value = temp;
   }
 
   void replaceRange(int start, int end, Iterable<T> newContents) {
-    value.replaceRange(start, end, newContents);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.replaceRange(start, end, newContents);
+    value = temp;
   }
 
   void removeRange(int start, int end) {
-    value.removeRange(start, end);
-    refresh();
+    final temp = List<T>.from(value);
+    temp.removeRange(start, end);
+    value = temp;
   }
 }
