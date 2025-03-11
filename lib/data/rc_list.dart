@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:reactr/data/rc.dart';
 
 class RcList<T> extends Rc<List<T>> {
@@ -10,13 +11,17 @@ class RcList<T> extends Rc<List<T>> {
   void addAll(List<T> list) {
     final temp = List<T>.from(value);
     temp.addAll(list);
-    value = temp;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      value = temp;
+    });
   }
 
   void add(T item) {
     final temp = List<T>.from(value);
     temp.add(item);
-    value = temp;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      value = temp;
+    });
   }
 
   void remove(T item) {
