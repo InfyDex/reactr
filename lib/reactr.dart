@@ -53,8 +53,8 @@ class Reactr {
     required String routeName,
     Object? arguments,
   }) async {
-    binding.onBind();
     Reactr.arguments = arguments;
+    binding.onBind();
     final result = await Navigator.pushNamed(
       context,
       routeName,
@@ -71,8 +71,8 @@ class Reactr {
     String? name,
     Object? arguments,
   }) async {
-    binding.onBind();
     Reactr.arguments = arguments;
+    binding.onBind();
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
@@ -91,8 +91,8 @@ class Reactr {
     String? name,
     Object? arguments,
   }) async {
-    binding.onBind();
     Reactr.arguments = arguments;
+    binding.onBind();
     final result = await Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -112,8 +112,8 @@ class Reactr {
     String? name,
     Object? arguments,
   }) async {
-    binding.onBind();
     Reactr.arguments = arguments;
+    binding.onBind();
     final result = await Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
