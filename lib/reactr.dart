@@ -68,6 +68,7 @@ class Reactr {
   static Future<dynamic> to<T extends ReactrController>({
     required ReactrBinding binding,
     required ReactrView<T> Function() builder,
+    String? name,
     Object? arguments,
   }) async {
     binding.onBind();
@@ -76,7 +77,7 @@ class Reactr {
       context,
       MaterialPageRoute(
         builder: (context) => builder.call(),
-        settings: RouteSettings(arguments: arguments),
+        settings: RouteSettings(arguments: arguments, name: name),
       ),
     );
     _callOnClose<T>();
@@ -87,6 +88,7 @@ class Reactr {
   static Future<dynamic> replace<T extends ReactrController>({
     required ReactrBinding binding,
     required ReactrView<T> Function() builder,
+    String? name,
     Object? arguments,
   }) async {
     binding.onBind();
@@ -95,7 +97,7 @@ class Reactr {
       context,
       MaterialPageRoute(
         builder: (context) => builder.call(),
-        settings: RouteSettings(arguments: arguments),
+        settings: RouteSettings(arguments: arguments, name: name),
       ),
     );
     _callOnClose<T>();
@@ -107,6 +109,7 @@ class Reactr {
     required ReactrBinding binding,
     required ReactrView<T> Function() builder,
     required RoutePredicate predicate,
+    String? name,
     Object? arguments,
   }) async {
     binding.onBind();
@@ -115,7 +118,7 @@ class Reactr {
       context,
       MaterialPageRoute(
         builder: (context) => builder.call(),
-        settings: RouteSettings(arguments: arguments),
+        settings: RouteSettings(arguments: arguments, name: name),
       ),
       predicate,
     );
