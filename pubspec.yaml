@@ -1,21 +1,21 @@
 name: reactr
-description: "State Management"
-version: 0.1.0
-homepage:
+description: Reactr is a state management library for Flutter applications. It provides a simple and efficient way to manage the state of your application using controllers and bindings.
+version: 0.1.1
+repository: https://github.com/InfyDex/reactr
 
 environment:
-  sdk: ^3.5.4
+  sdk: ">=3.3.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  get_it: ^8.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  get_it: ^8.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

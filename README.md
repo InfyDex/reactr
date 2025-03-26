@@ -1,39 +1,172 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Reactr
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+Reactr is a state management library for Flutter applications. It provides a simple and efficient way to manage the state of your application using controllers and bindings.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Installation
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Add the following dependency to your `pubspec.yaml` file:
 
-## Features
+```yaml
+dependencies:
+  reactr: ^0.1.0
+```
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Then, run `flutter pub get` to install the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+### Creating a Controller
+
+Create a controller by extending `ReactrController`:
 
 ```dart
-const like = 'sample';
+import 'package:reactr/reactr.dart';
+
+class CounterController extends ReactrController {
+  var count = Rc<int>(0);
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialization code
+  }
+
+  void increment() {
+    count.value++;
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    // Clean up resources
+  }
+}
 ```
 
-## Additional information
+### Creating a View
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Create a view by extending `ReactrView` and using the controller:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:reactr/reactr.dart';
+
+class CounterView extends ReactrView<CounterController> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Counter')),
+      body: Center(
+        child: React<int>(
+          notifier: controller.count.notifier,
+          builder: (context, count) {
+            return Text('Count: $count');
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.increment,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+```
+
+### Registering the Controller
+
+Register the controller using `putSingleton` or `putLazySingleton`:
+
+```dart
+void main() {
+  Reactr.putSingleton(CounterController());
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: CounterView(),
+    );
+  }
+}
+```
+
+### Navigation
+
+Use `Reactr.to` or `Reactr.toNamed` for navigation:
+
+```dart
+Reactr.to<CounterController>(
+context: context,
+binding: CounterBinding(),
+builder: () => CounterView(),
+);
+```
+
+### Example
+
+Here is a complete example:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:reactr/reactr.dart';
+
+void main() {
+  Reactr.putSingleton(CounterController());
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: CounterView(),
+    );
+  }
+}
+
+class CounterController extends ReactrController {
+  var count = Rc<int>(0);
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialization code
+  }
+
+  void increment() {
+    count.value++;
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    // Clean up resources
+  }
+}
+
+class CounterView extends ReactrView<CounterController> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Counter')),
+      body: Center(
+        child: React<int>(
+          notifier: controller.count.notifier,
+          builder: (context, count) {
+            return Text('Count: $count');
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.increment,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+```
+
+This example demonstrates how to set up a simple counter application using Reactr for state management.
