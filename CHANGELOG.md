@@ -1,3 +1,4 @@
-## 0.0.1
+## 0.1.1
 
-* TODO: Describe initial release.
+- Added `RcBool` and `RcDouble` classes for reactive boolean and double values.
+- Updated documentation and examples.
