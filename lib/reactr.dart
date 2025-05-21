@@ -30,7 +30,18 @@ class Reactr {
 
   static GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
 
-  static BuildContext get context => key.currentContext!;
+  static BuildContext get context {
+    try {
+      return key.currentContext!;
+    } catch (e) {
+      ReactrLogger.log(
+        "❌ Error getting context - Please wrap your app with ReactrMaterialApp}",
+      );
+      throw Exception("Context is not available");
+    }
+  }
+
+  static bool get isDarkMode => Theme.of(context).brightness == Brightness.dark;
 
   static void _callOnClose<T extends ReactrController>() {
     try {
