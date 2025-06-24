@@ -43,16 +43,6 @@ class Reactr {
 
   static bool get isDarkMode => Theme.of(context).brightness == Brightness.dark;
 
-  static void _callOnClose<T extends ReactrController>() {
-    try {
-      find<T>().onClose();
-    } catch (e) {
-      ReactrLogger.log(
-        "❌ Error calling onClose of ${T.toString()} - ${e.toString()}",
-      );
-    }
-  }
-
   static Object? arguments;
 
   static double get width => MediaQuery.of(context).size.width;
@@ -71,7 +61,6 @@ class Reactr {
       routeName,
       arguments: arguments,
     );
-    _callOnClose<T>();
     binding.unBind();
     return result;
   }
@@ -91,7 +80,6 @@ class Reactr {
         settings: RouteSettings(arguments: arguments, name: name),
       ),
     );
-    _callOnClose<T>();
     binding.unBind();
     return result;
   }
@@ -111,7 +99,6 @@ class Reactr {
         settings: RouteSettings(arguments: arguments, name: name),
       ),
     );
-    _callOnClose<T>();
     binding.unBind();
     return result;
   }
@@ -133,7 +120,6 @@ class Reactr {
       ),
       predicate,
     );
-    _callOnClose<T>();
     binding.unBind();
     return result;
   }
@@ -179,6 +165,12 @@ class Reactr {
   }
 
   static void remove<T extends Object>() {
+    try {
+      final object = find<T>();
+      if (object is ReactrController) {
+        object.onClose();
+      }
+    } catch (_) {}
     GetIt.I.unregister<T>();
     _logDestroyed(T.toString());
   }
