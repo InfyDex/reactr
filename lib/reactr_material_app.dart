@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reactr/navigation/reactr_route_observer.dart';
 import 'package:reactr/reactr.dart';
 
 class ReactrMaterialApp extends StatelessWidget {
@@ -497,6 +498,12 @@ class ReactrMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Create a list that includes our ReactrRouteObserver
+    final List<NavigatorObserver> observers = [
+      ReactrRouteObserver(),
+      ...(navigatorObservers ?? []),
+    ];
+
     return MaterialApp(
       builder: builder,
       checkerboardOffscreenLayers: checkerboardOffscreenLayers,
@@ -516,7 +523,7 @@ class ReactrMaterialApp extends StatelessWidget {
       localizationsDelegates: localizationsDelegates,
       navigatorKey: navigatorKey,
       key: key,
-      navigatorObservers: navigatorObservers ?? [],
+      navigatorObservers: observers, // Use our updated list of observers
       onGenerateInitialRoutes: onGenerateInitialRoutes,
       onGenerateRoute: onGenerateRoute,
       onGenerateTitle: onGenerateTitle,
