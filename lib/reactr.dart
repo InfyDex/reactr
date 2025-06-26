@@ -16,11 +16,13 @@ export 'package:reactr/data/rcn_string.dart';
 export 'package:reactr/widgets/react.dart';
 export 'package:reactr/widgets/react_builder.dart';
 export 'package:reactr/widgets/reactr_view.dart';
+export 'package:reactr/navigation/reactr_route_observer.dart';
 export 'package:reactr/reactr.dart';
 export 'package:reactr/reactr_material_app.dart';
 import 'package:flutter/material.dart';
 import 'package:reactr/bindings/reactr_binding.dart';
 import 'package:reactr/controllers/reactr_controller.dart';
+import 'package:reactr/navigation/reactr_route_observer.dart';
 import 'package:reactr/reactr_logger.dart';
 import 'package:reactr/widgets/reactr_view.dart';
 import 'package:get_it/get_it.dart';
@@ -56,13 +58,28 @@ class Reactr {
   }) async {
     Reactr.arguments = arguments;
     binding.onBind();
-    final result = await Navigator.pushNamed(
+
+    // We'll use pushNamed but first register the route with our observer
+    // Note: We have to get the route after push since we don't create it directly
+    final future = Navigator.pushNamed(
       context,
       routeName,
       arguments: arguments,
     );
-    binding.unBind();
-    return result;
+
+    // We'll use Navigator.of(context).routes to find the newly pushed route
+    // Wait a brief moment for the route to be added to the Navigator
+    Future.delayed(Duration.zero, () {
+      final routes = Navigator.of(context).widget.pages;
+      if (routes.isNotEmpty) {
+        final currentRoute = ModalRoute.of(context);
+        if (currentRoute != null) {
+          ReactrRouteObserver.registerBinding(currentRoute, binding);
+        }
+      }
+    });
+
+    return future;
   }
 
   static Future<dynamic> to<T extends ReactrController>({
@@ -73,15 +90,16 @@ class Reactr {
   }) async {
     Reactr.arguments = arguments;
     binding.onBind();
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => builder.call(),
-        settings: RouteSettings(arguments: arguments, name: name),
-      ),
+
+    final route = MaterialPageRoute(
+      builder: (context) => builder.call(),
+      settings: RouteSettings(arguments: arguments, name: name),
     );
-    binding.unBind();
-    return result;
+
+    // Register the binding with the route observer
+    ReactrRouteObserver.registerBinding(route, binding);
+
+    return Navigator.push(context, route);
   }
 
   static Future<dynamic> replace<T extends ReactrController>({
@@ -92,15 +110,16 @@ class Reactr {
   }) async {
     Reactr.arguments = arguments;
     binding.onBind();
-    final result = await Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => builder.call(),
-        settings: RouteSettings(arguments: arguments, name: name),
-      ),
+
+    final route = MaterialPageRoute(
+      builder: (context) => builder.call(),
+      settings: RouteSettings(arguments: arguments, name: name),
     );
-    binding.unBind();
-    return result;
+
+    // Register the binding with the route observer
+    ReactrRouteObserver.registerBinding(route, binding);
+
+    return Navigator.pushReplacement(context, route);
   }
 
   static Future<dynamic> replaceUntil<T extends ReactrController>({
@@ -112,16 +131,16 @@ class Reactr {
   }) async {
     Reactr.arguments = arguments;
     binding.onBind();
-    final result = await Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => builder.call(),
-        settings: RouteSettings(arguments: arguments, name: name),
-      ),
-      predicate,
+
+    final route = MaterialPageRoute(
+      builder: (context) => builder.call(),
+      settings: RouteSettings(arguments: arguments, name: name),
     );
-    binding.unBind();
-    return result;
+
+    // Register the binding with the route observer
+    ReactrRouteObserver.registerBinding(route, binding);
+
+    return Navigator.pushAndRemoveUntil(context, route, predicate);
   }
 
   static void back({dynamic result, bool isSnackbar = false}) {
@@ -170,8 +189,8 @@ class Reactr {
       if (object is ReactrController) {
         object.onClose();
       }
+      GetIt.I.unregister<T>();
     } catch (_) {}
-    GetIt.I.unregister<T>();
     _logDestroyed(T.toString());
   }
 
