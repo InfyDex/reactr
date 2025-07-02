@@ -183,13 +183,13 @@ class Reactr {
     return GetIt.I<T>();
   }
 
-  static void remove<T extends Object>() {
+  static Future<void> remove<T extends Object>() async {
     try {
       final object = find<T>();
       if (object is ReactrController) {
         object.onClose();
       }
-      GetIt.I.unregister<T>();
+      await GetIt.I.unregister<T>();
     } catch (_) {}
     _logDestroyed(T.toString());
   }
