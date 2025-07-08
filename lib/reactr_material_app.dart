@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reactr/navigation/reactr_route_observer.dart';
 import 'package:reactr/reactr.dart';
 
 class ReactrMaterialApp extends StatelessWidget {

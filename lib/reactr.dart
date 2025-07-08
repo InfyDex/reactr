@@ -13,6 +13,7 @@ export 'package:reactr/data/rcn_bool.dart';
 export 'package:reactr/data/rcn_double.dart';
 export 'package:reactr/data/rcn_int.dart';
 export 'package:reactr/data/rcn_string.dart';
+export 'package:reactr/widgets/multi_react.dart';
 export 'package:reactr/widgets/react.dart';
 export 'package:reactr/widgets/react_builder.dart';
 export 'package:reactr/widgets/reactr_view.dart';
@@ -57,8 +58,6 @@ class Reactr {
     Object? arguments,
   }) async {
     Reactr.arguments = arguments;
-    binding.onBind();
-
     // We'll use pushNamed but first register the route with our observer
     // Note: We have to get the route after push since we don't create it directly
     final future = Navigator.pushNamed(
@@ -89,8 +88,6 @@ class Reactr {
     Object? arguments,
   }) async {
     Reactr.arguments = arguments;
-    binding.onBind();
-
     final route = MaterialPageRoute(
       builder: (context) => builder.call(),
       settings: RouteSettings(arguments: arguments, name: name),
@@ -109,8 +106,6 @@ class Reactr {
     Object? arguments,
   }) async {
     Reactr.arguments = arguments;
-    binding.onBind();
-
     final route = MaterialPageRoute(
       builder: (context) => builder.call(),
       settings: RouteSettings(arguments: arguments, name: name),
@@ -130,8 +125,6 @@ class Reactr {
     Object? arguments,
   }) async {
     Reactr.arguments = arguments;
-    binding.onBind();
-
     final route = MaterialPageRoute(
       builder: (context) => builder.call(),
       settings: RouteSettings(arguments: arguments, name: name),
