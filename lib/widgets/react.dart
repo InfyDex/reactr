@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reactr/reactr.dart';
 
+@Deprecated('Use `MultiReact` widget instead.')
 class React extends StatefulWidget {
   final Widget Function() builder;
 
