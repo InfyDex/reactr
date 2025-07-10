@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reactr/reactr.dart';
 
-class ReactrMaterialApp extends StatelessWidget {
+class ReactrMaterialApp extends StatefulWidget {
   ReactrMaterialApp({
     super.key,
     GlobalKey<NavigatorState>? navigatorKey,
@@ -496,52 +496,64 @@ class ReactrMaterialApp extends StatelessWidget {
   final AnimationStyle? themeAnimationStyle;
 
   @override
+  State<ReactrMaterialApp> createState() => _ReactrMaterialAppState();
+}
+
+class _ReactrMaterialAppState extends State<ReactrMaterialApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Initialize ReactStorage here
+    ReactrStorage.init();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Create a list that includes our ReactrRouteObserver
     final List<NavigatorObserver> observers = [
       ReactrRouteObserver(),
-      ...(navigatorObservers ?? []),
+      ...(widget.navigatorObservers ?? []),
     ];
 
     return MaterialApp(
-      builder: builder,
-      checkerboardOffscreenLayers: checkerboardOffscreenLayers,
-      checkerboardRasterCacheImages: checkerboardRasterCacheImages,
-      color: color,
-      darkTheme: darkTheme,
-      debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-      debugShowMaterialGrid: debugShowMaterialGrid,
-      actions: actions,
-      highContrastDarkTheme: highContrastDarkTheme,
-      highContrastTheme: highContrastTheme,
-      home: home,
-      initialRoute: initialRoute,
-      locale: locale,
-      localeListResolutionCallback: localeListResolutionCallback,
-      localeResolutionCallback: localeResolutionCallback,
-      localizationsDelegates: localizationsDelegates,
-      navigatorKey: navigatorKey,
-      key: key,
+      builder: widget.builder,
+      checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
+      checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
+      color: widget.color,
+      darkTheme: widget.darkTheme,
+      debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
+      debugShowMaterialGrid: widget.debugShowMaterialGrid,
+      actions: widget.actions,
+      highContrastDarkTheme: widget.highContrastDarkTheme,
+      highContrastTheme: widget.highContrastTheme,
+      home: widget.home,
+      initialRoute: widget.initialRoute,
+      locale: widget.locale,
+      localeListResolutionCallback: widget.localeListResolutionCallback,
+      localeResolutionCallback: widget.localeResolutionCallback,
+      localizationsDelegates: widget.localizationsDelegates,
+      navigatorKey: widget.navigatorKey,
+      key: widget.key,
       navigatorObservers: observers, // Use our updated list of observers
-      onGenerateInitialRoutes: onGenerateInitialRoutes,
-      onGenerateRoute: onGenerateRoute,
-      onGenerateTitle: onGenerateTitle,
-      onNavigationNotification: onNavigationNotification,
-      onUnknownRoute: onUnknownRoute,
-      restorationScopeId: restorationScopeId,
-      routes: routes ?? {},
-      scaffoldMessengerKey: scaffoldMessengerKey,
-      scrollBehavior: scrollBehavior,
-      shortcuts: shortcuts,
-      showPerformanceOverlay: showPerformanceOverlay,
-      showSemanticsDebugger: showSemanticsDebugger,
-      supportedLocales: supportedLocales,
-      theme: theme,
-      themeAnimationCurve: themeAnimationCurve,
-      themeAnimationDuration: themeAnimationDuration,
-      themeAnimationStyle: themeAnimationStyle,
-      themeMode: themeMode,
-      title: title,
+      onGenerateInitialRoutes: widget.onGenerateInitialRoutes,
+      onGenerateRoute: widget.onGenerateRoute,
+      onGenerateTitle: widget.onGenerateTitle,
+      onNavigationNotification: widget.onNavigationNotification,
+      onUnknownRoute: widget.onUnknownRoute,
+      restorationScopeId: widget.restorationScopeId,
+      routes: widget.routes ?? {},
+      scaffoldMessengerKey: widget.scaffoldMessengerKey,
+      scrollBehavior: widget.scrollBehavior,
+      shortcuts: widget.shortcuts,
+      showPerformanceOverlay: widget.showPerformanceOverlay,
+      showSemanticsDebugger: widget.showSemanticsDebugger,
+      supportedLocales: widget.supportedLocales,
+      theme: widget.theme,
+      themeAnimationCurve: widget.themeAnimationCurve,
+      themeAnimationDuration: widget.themeAnimationDuration,
+      themeAnimationStyle: widget.themeAnimationStyle,
+      themeMode: widget.themeMode,
+      title: widget.title,
     );
   }
 }
