@@ -1,5 +1,8 @@
 library reactr;
 
+// Animations
+export 'animations/reactr_ticker_provider.dart';
+
 // Core exports
 export 'reactr_material_app.dart';
 export 'reactr_logger.dart';
