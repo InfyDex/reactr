@@ -58,7 +58,7 @@ class Reactr {
       return key.currentContext!;
     } catch (e) {
       ReactrLogger.log(
-        "❌ Error getting context - Please wrap your app with ReactrMaterialApp}",
+        "❌ Error getting context - Please wrap your app with ReactrMaterialApp",
       );
       throw Exception("Context is not available");
     }

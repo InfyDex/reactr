@@ -30,11 +30,16 @@ class CounterView extends ReactrView<CounterController> {
               child: const Text("Show SnackBar"),
             ),
             const Text('You have pushed the button this many times:'),
-            React(
-              () => Text(
-                '${controller.count.value.toString()} ${controller.count1.value.toString()}',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
+            MultiReact(
+              values: [controller.count, controller.count1],
+              builder: (values) {
+                final count = values[0] as int;
+                final count1 = values[1] as int;
+                return Text(
+                  '$count $count1',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
             ),
             const SizedBox(height: 100),
             Row(

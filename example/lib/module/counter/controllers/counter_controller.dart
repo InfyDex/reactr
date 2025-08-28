@@ -6,7 +6,6 @@ class CounterController extends ReactrController {
 
   @override
   void onInit() {
-    super.onInit();
     count.value = 0;
   }
 
@@ -16,11 +15,5 @@ class CounterController extends ReactrController {
 
   void increment1() {
     count1.value++;
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    // dispose required variables
   }
 }
