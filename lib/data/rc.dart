@@ -17,7 +17,7 @@ class Rc<T> {
 
   void setValue(T value) => _value.value = value;
 
-  void refresh() => _value.notifyListeners();
+  void refresh() => _value.value = _value.value;
 
   void addListener(void Function() listener) {
     _value.addListener(listener);

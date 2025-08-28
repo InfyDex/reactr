@@ -89,8 +89,10 @@ class Reactr {
     // We'll use Navigator.of(context).routes to find the newly pushed route
     // Wait a brief moment for the route to be added to the Navigator
     Future.delayed(Duration.zero, () {
+      // ignore: use_build_context_synchronously
       final routes = Navigator.of(context).widget.pages;
       if (routes.isNotEmpty) {
+        // ignore: use_build_context_synchronously
         final currentRoute = ModalRoute.of(context);
         if (currentRoute != null) {
           ReactrRouteObserver.registerBinding(currentRoute, binding);
