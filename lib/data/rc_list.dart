@@ -37,13 +37,13 @@ class RcList<T> extends Rc<List<T>> {
 
   void insert(int index, T item) {
     final temp = List<T>.from(value);
-    temp.insert(index,item);
+    temp.insert(index, item);
     value = temp;
   }
 
   void insertAll(int index, List<T> items) {
     final temp = List<T>.from(value);
-    temp.insertAll(index,items);
+    temp.insertAll(index, items);
     value = temp;
   }
 
@@ -83,7 +83,8 @@ class RcList<T> extends Rc<List<T>> {
     value = temp;
   }
 
-  void setRange(int start, int end, Iterable<T> newContents, [int skipCount = 0]) {
+  void setRange(int start, int end, Iterable<T> newContents,
+      [int skipCount = 0]) {
     final temp = List<T>.from(value);
     temp.setRange(start, end, newContents, skipCount);
     value = temp;

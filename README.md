@@ -23,7 +23,7 @@ Add Reactr to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  reactr: ^0.2.7
+  reactr: ^0.2.9
 ```
 
 Then run:

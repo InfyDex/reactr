@@ -12,7 +12,8 @@ class MultiReact extends StatelessWidget {
     return _wrapWithListeners(builder, values);
   }
 
-  Widget _wrapWithListeners(Widget Function(List data) builder, List<Rc> values) {
+  Widget _wrapWithListeners(
+      Widget Function(List data) builder, List<Rc> values) {
     if (values.isEmpty) {
       return builder(values.map((e) => e.value).toList());
     }
@@ -24,11 +25,10 @@ class MultiReact extends StatelessWidget {
       valueListenable: first.notifier,
       builder: (context, value, child) {
         return _wrapWithListeners(
-              (data) => builder([value, ...data]),
+          (data) => builder([value, ...data]),
           rest,
         );
       },
     );
   }
 }
-
