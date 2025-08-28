@@ -1,5 +1,7 @@
 import 'package:example/module/counter/controllers/counter_controller.dart';
+import 'package:example/module/counter/bindings/counter_binding.dart';
 import 'package:example/module/counter/views/test_bottom_sheet.dart';
+import 'package:example/module/counter/views/react_demo.dart';
 import 'package:flutter/material.dart';
 import 'package:reactr/reactr.dart';
 
@@ -29,19 +31,28 @@ class CounterView extends ReactrView<CounterController> {
               ),
               child: const Text("Show SnackBar"),
             ),
-            const Text('You have pushed the button this many times:'),
-            MultiReact(
-              values: [controller.count, controller.count1],
-              builder: (values) {
-                final count = values[0] as int;
-                final count1 = values[1] as int;
-                return Text(
-                  '$count $count1',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                );
-              },
+            FilledButton(
+              onPressed: () => Reactr.to(
+                binding: CounterBinding(),
+                builder: () => const ReactDemoView(),
+              ),
+              child: const Text("React Widget Demo"),
             ),
-            const SizedBox(height: 100),
+            const Text('You have pushed the button this many times:'),
+            React(() {
+              return Text(
+                '${controller.count.value} ${controller.count1.value}',
+                style: Theme.of(context).textTheme.headlineMedium,
+              );
+            }),
+            const SizedBox(height: 20),
+            React(() {
+              return Text(
+                'Visibility: ${controller.isVisible.value ? "Visible" : "Hidden"}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              );
+            }),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -53,6 +64,11 @@ class CounterView extends ReactrView<CounterController> {
                 FilledButton(
                   onPressed: controller.increment1,
                   child: const Icon(Icons.safety_check),
+                ),
+                const SizedBox(width: 10),
+                FilledButton(
+                  onPressed: controller.toggleVisibility,
+                  child: const Icon(Icons.visibility),
                 ),
               ],
             ),
