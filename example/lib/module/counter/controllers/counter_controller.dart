@@ -3,6 +3,7 @@ import 'package:reactr/reactr.dart';
 class CounterController extends ReactrController {
   final count = RcInt(-1);
   final count1 = RcInt(0);
+  final isVisible = RcBool(true);
 
   @override
   void onInit() {
@@ -15,5 +16,9 @@ class CounterController extends ReactrController {
 
   void increment1() {
     count1.value++;
+  }
+
+  void toggleVisibility() {
+    isVisible.value = !isVisible.value;
   }
 }

@@ -146,7 +146,7 @@ class CounterView extends ReactrView<CounterController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Reactive widget that rebuilds when count changes
+            // Reactive widget that automatically tracks all used variables
             React(
               () => Text(
                 'Count: ${controller.count.value}',
@@ -266,7 +266,7 @@ class MyController extends ReactrController {
 ### Reactive Widgets
 
 #### React Widget
-The `React` widget automatically rebuilds when any reactive variable used within it changes:
+The `React` widget automatically tracks and rebuilds when any reactive variable used within it changes. It's the simplest way to create reactive UI components:
 
 ```dart
 React(
@@ -274,8 +274,32 @@ React(
 )
 ```
 
+The `React` widget automatically detects which reactive variables are accessed within the builder function and subscribes to their changes. This means you don't need to manually specify which variables to watch - it happens automatically!
+
+**Key Features:**
+- **Automatic Dependency Tracking**: No need to manually specify which variables to watch
+- **Dynamic Dependencies**: Automatically handles changes in dependencies during runtime
+- **Memory Efficient**: Properly manages listeners to prevent memory leaks
+- **Simple API**: Just wrap your widget with `React(() => YourWidget())`
+
+**Example with Multiple Variables:**
+```dart
+React(() {
+  return Column(
+    children: [
+      Text('Count: ${controller.count.value}'),
+      Text('Name: ${controller.name.value}'),
+      if (controller.isVisible.value)
+        Text('This is visible!'),
+    ],
+  );
+})
+```
+
+This widget will automatically rebuild whenever `controller.count.value`, `controller.name.value`, or `controller.isVisible.value` changes.
+
 #### MultiReact Widget
-The `MultiReact` widget can listen to multiple reactive variables:
+The `MultiReact` widget can listen to multiple reactive variables. This is useful when you need explicit control over which variables to watch or when you want to access the values as a list:
 
 ```dart
 MultiReact(
@@ -291,6 +315,10 @@ MultiReact(
   },
 )
 ```
+
+**When to use React vs MultiReact:**
+- **Use `React`** when you want automatic dependency tracking and don't need to access values as a list
+- **Use `MultiReact`** when you need explicit control over which variables to watch or want to access values as a list
 
 ### Controller Lifecycle
 
