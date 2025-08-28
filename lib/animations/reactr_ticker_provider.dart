@@ -28,12 +28,14 @@ import 'package:reactr/reactr.dart';
 ///   }
 /// }
 /// ```
-mixin ReactrSingleTickerProviderStateMixin on ReactrController implements TickerProvider {
+mixin ReactrSingleTickerProviderStateMixin on ReactrController
+    implements TickerProvider {
   Ticker? _ticker;
 
   @override
   Ticker createTicker(TickerCallback onTick) {
-    assert(_ticker == null, 'A ReactrSingleTickerProviderStateMixin can only be used as a TickerProvider once.');
+    assert(_ticker == null,
+        'A ReactrSingleTickerProviderStateMixin can only be used as a TickerProvider once.');
     _ticker = Ticker(onTick, debugLabel: 'created by $this');
 
     // We'll dispose the ticker in onClose
@@ -86,7 +88,8 @@ mixin ReactrSingleTickerProviderStateMixin on ReactrController implements Ticker
 ///   }
 /// }
 /// ```
-mixin ReactrTickerProviderStateMixin on ReactrController implements TickerProvider {
+mixin ReactrTickerProviderStateMixin on ReactrController
+    implements TickerProvider {
   Set<Ticker>? _tickers;
 
   @override
